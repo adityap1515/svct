@@ -5,22 +5,27 @@
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
-// Back to Top button functionality
-const backToTopButton = document.getElementById("backToTop");
 
-window.onscroll = function() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        backToTopButton.style.display = "block";
-    } else {
-        backToTopButton.style.display = "none";
-    }
-};
 
-backToTopButton.onclick = function(e) {
-    e.preventDefault();
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-};
+        //backtoTop Visibility on scroll [function]
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.scrollY > 300) { 
+                backToTopButton.style.display = 'block';
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.style.display = 'none';
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        // Scroll to the top when the button is clicked
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
 document.addEventListener('scroll', () => {
     const section = document.querySelector('.seva-cards');
@@ -33,3 +38,19 @@ document.addEventListener('scroll', () => {
     }
   });
   
+
+  document.addEventListener("scroll", function() {
+    const cards = document.querySelectorAll(".card");
+    const windowHeight = window.innerHeight;
+
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        const cardBottom = card.getBoundingClientRect().bottom;
+
+        if (cardTop >= 0 && cardBottom <= windowHeight) {
+            card.classList.add("visible");
+        } else {
+            card.classList.remove("visible");
+        }
+    });
+});

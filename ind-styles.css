@@ -85,6 +85,33 @@ body {
     max-height: 4rem;
 }
 
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3949ab;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#backToTop:hover {
+    background-color: #303f9f;
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+#backToTop.visible {
+    display: block;
+    opacity: 1;
+}
+
 /* Seva cards with animations */
 .seva-cards {
     position: relative;
@@ -106,12 +133,16 @@ body {
 .card {
     flex: 0 0 100vh;
     scroll-snap-align: start;
-    background-color: #f2f2f2;
+    background-color: #eeb993;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5em;
+    border-radius: 10%;
+    border-width: 2rem;
+    border-color: #ff8133;
+    border-style: solid;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease-out, transform 1s ease-out;
