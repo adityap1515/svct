@@ -125,30 +125,7 @@ body {
         .next {
             right: 10px;
         }
-/*Cards scrolling*/
-        .seva-cards {
-            width: 100%;
-            overflow: hidden;
-            padding: 20px 0;
-        }
-        .card-container {
-            display: flex;
-            animation: scroll 20s linear infinite;
-        }
-        .card {
-            flex: 0 0 auto;
-            width: 200px;
-            height: 250px;
-            margin-right: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #333;
-        }
+/*carousel for cards*/
         @keyframes scroll {
             0% {
                 transform: translateX(0);
@@ -205,11 +182,12 @@ body {
     overflow-x: auto;
     padding: 20px 0;
    animation: scroll-carousel 40s linear infinite;
+   display: flex;
 }
 
 .card {
-    flex: 0 0 auto;
-    min-width: 45rem;
+    min-width: 25rem;
+    max-width: 50rem;
     height: 45rem;
         background-color: #ffffff;
         border-radius: 10px;
@@ -220,27 +198,27 @@ body {
         font-size: 18px;
         color: #333;
         margin-bottom: 10px;
-        display: flex;
-    align-items: center;
-    justify-content: center;
+        align-content: flex-end;
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding: 2rem;
     margin-right: 20px; /* Spacing between cards */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
                     @media (max-width: 768px) {
                         .card {
-                            min-width: 450px;
-                            height: 350px;
-                            font-size: 16px;
-                            margin-right: 15px;
+                            min-width: 10rem;
+                            max-width: 25rem;
+                            font-size: larger;
                         }
                     }
                     @media (max-width: 480px) {
                         .card {
-                            min-width: 25rem;
+                            min-width: 8rem;
+                            max-width: 20rem;
                             height: 45rem;
-                            font-size: 14px;
-                            margin-right: 10px;
+                            font-size: larger;
                         }
                     }
 @keyframes scroll-carousel {
