@@ -57,6 +57,18 @@
                 nextButton.addEventListener('click', nextSlide);
                 prevButton.addEventListener('click', prevSlide);
 
+                //cards carousel
+                const container = document.querySelector('.card-container');
+                const cards = document.querySelectorAll('.card');
+
+                // Clone the cards and append them to the container
+                cards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    container.appendChild(clone);
+                });
+
+
+
 document.addEventListener('scroll', () => {
     const section = document.querySelector('.seva-cards');
     const bounding = section.getBoundingClientRect();
@@ -68,19 +80,3 @@ document.addEventListener('scroll', () => {
     }
   });
   
-
-  document.addEventListener("scroll", function() {
-    const cards = document.querySelectorAll(".card");
-    const windowHeight = window.innerHeight;
-
-    cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        const cardBottom = card.getBoundingClientRect().bottom;
-
-        if (cardTop >= 0 && cardBottom <= windowHeight) {
-            card.classList.add("visible");
-        } else {
-            card.classList.remove("visible");
-        }
-    });
-});

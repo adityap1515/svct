@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
 }
 .navbar {
     background-color: #ff8133;
@@ -86,46 +85,79 @@ body {
     max-width: 4rem;
     max-height: 4rem;
 }
+/*carousel function*/
+        .carousel {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+/*Cards scrolling*/
+        .seva-cards {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        .card-container {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+        .card {
+            flex: 0 0 auto;
+            width: 200px;
+            height: 250px;
+            margin-right: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #333;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
 
-.carousel {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-}
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: white;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-.slide.active {
-    opacity: 1;
-}
-.nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-.prev {
-    left: 10px;
-}
-.next {
-    right: 10px;
-}
 
 /*back to top */
     #backToTop {
@@ -158,37 +190,66 @@ body {
 /* Seva cards with animations */
 .seva-cards {
     position: relative;
-    height: 100vh;
+    min-height: 300px;
+    width: 100%;
     overflow: hidden;
+    background-color: #b5aeae;
+    padding: 40px 0;
 }
 
 .card-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
     display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    justify-content: flex-start;
+    align-items: center;
+    width: max-content;
+    overflow-x: auto;
+    padding: 20px 0;
+   animation: scroll-carousel 40s linear infinite;
 }
 
 .card {
-    flex: 0 0 100vh;
-    scroll-snap-align: start;
-    background-color: #eeb993;
-    margin-bottom: 10px;
-    display: flex;
+    flex: 0 0 auto;
+    min-width: 45rem;
+    height: 45rem;
+        background-color: #ffffff;
+        border-radius: 10px;
+        border: 2px solid #ff8133;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+        display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em;
-    border-radius: 10%;
-    border-width: 2rem;
-    border-color: #ff8133;
-    border-style: solid;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    margin-right: 20px; /* Spacing between cards */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+                    @media (max-width: 768px) {
+                        .card {
+                            min-width: 450px;
+                            height: 350px;
+                            font-size: 16px;
+                            margin-right: 15px;
+                        }
+                    }
+                    @media (max-width: 480px) {
+                        .card {
+                            min-width: 25rem;
+                            height: 45rem;
+                            font-size: 14px;
+                            margin-right: 10px;
+                        }
+                    }
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .card.visible {
