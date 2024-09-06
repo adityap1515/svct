@@ -27,6 +27,36 @@
             });
         });
 
+
+                //cAROUSEL  function
+                const slides = document.querySelectorAll('.slide');
+                const prevButton = document.querySelector('.prev');
+                const nextButton = document.querySelector('.next');
+                let currentSlide = 0;
+
+                function showSlide(index) {
+                    slides[currentSlide].classList.remove('active');
+                    slides[index].classList.add('active');
+                    currentSlide = index;
+                }
+                const interval = setInterval(nextSlide, 2700);
+                setTimeout(() => {
+                    clearInterval(interval);
+                }, 16000);
+
+                function nextSlide() {
+                    let index = (currentSlide + 1) % slides.length;
+                    showSlide(index);
+                }
+
+                function prevSlide() {
+                    let index = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(index);
+                }
+
+                nextButton.addEventListener('click', nextSlide);
+                prevButton.addEventListener('click', prevSlide);
+
 document.addEventListener('scroll', () => {
     const section = document.querySelector('.seva-cards');
     const bounding = section.getBoundingClientRect();
