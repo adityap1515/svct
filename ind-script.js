@@ -57,15 +57,7 @@
                 nextButton.addEventListener('click', nextSlide);
                 prevButton.addEventListener('click', prevSlide);
 
-                //cards carousel
-                const container = document.querySelector('.card-container');
-                const cards = document.querySelectorAll('.card');
-
-                // Clone the cards and append them to the container
-                cards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    container.appendChild(clone);
-                });
+               
 
 
 
