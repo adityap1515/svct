@@ -10,7 +10,7 @@
         //backtoTop Visibility on scroll [function]
         window.addEventListener('scroll', function() {
             const backToTopButton = document.getElementById('backToTop');
-            if (window.scrollY > 300) { 
+            if (window.scrollY > 200) { 
                 backToTopButton.style.display = 'block';
                 backToTopButton.classList.add('visible');
             } else {
