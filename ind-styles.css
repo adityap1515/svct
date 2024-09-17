@@ -115,7 +115,7 @@ body {
         }
         .homeslides-imagecontainer{
            
-            padding-left:5% ;
+          padding: 3%;
         }
 
         .slide.active {
@@ -232,7 +232,7 @@ body {
     min-height: 300px;
     width: 100%;
     overflow: hidden;
-    background-color: #17bebb;
+    background-color: #ffe7e7;
     padding: 40px 0;
 }
 

@@ -39,10 +39,10 @@
                     slides[index].classList.add('active');
                     currentSlide = index;
                 }
-                const interval = setInterval(nextSlide, 2500);
+                const interval = setInterval(nextSlide, 3000);
                 setTimeout(() => {
                 clearInterval(interval);
-                }, 16000);
+                }, 35000);
 
                 function nextSlide() {
                     let index = (currentSlide + 1) % slides.length;
