@@ -42,7 +42,7 @@
                 const interval = setInterval(nextSlide, 3000);
                 setTimeout(() => {
                 clearInterval(interval);
-                }, 35000);
+                }, 45000);
 
                 function nextSlide() {
                     let index = (currentSlide + 1) % slides.length;
@@ -57,7 +57,8 @@
                 nextButton.addEventListener('click', nextSlide);
                 prevButton.addEventListener('click', prevSlide);
 
-               
+
+
 
 
 

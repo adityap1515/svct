@@ -112,7 +112,14 @@ body {
         .homeslides{
             background-color: #da974f;
             padding: 5%;
+            transform: translateX(-10%);
+            transition: transform 0.9s ease; 
         }
+        
+        .homeslides.visible {
+            transform: translateX(0); 
+        }
+        
         .homeslides-imagecontainer{
            
           padding: 3%;
@@ -360,3 +367,18 @@ body {
     padding-top: 1rem;
     border-top: 1px solid #3949ab;
 }
+
+
+        .ytvid{
+           justify-content: center;
+           align-items: center;
+           padding-left: 16%;
+           
+        }
+        .vid{
+            padding: 2%;
+        }
+        #s1img{
+            max-width: 100vb;
+            max-height: 100vh;
+        }
