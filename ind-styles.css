@@ -112,13 +112,9 @@ body {
         .homeslides{
             background-color: #da974f;
             padding: 5%;
-            transform: translateX(-10%);
-            transition: transform 0.9s ease; 
+           
         }
         
-        .homeslides.visible {
-            transform: translateX(0); 
-        }
         
         .homeslides-imagecontainer{
            
