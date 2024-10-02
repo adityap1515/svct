@@ -125,3 +125,26 @@ p {
         width: 50px; 
     }
 }
+
+
+        .banner{
+            height: 25rem;
+            width: auto;
+        }
+
+        .ctabutton{
+            background-color: #af5923;
+            border-color: white;
+            border-width: .1rem;
+            border-style: solid;
+        }
+        .ctabutton:hover{
+            font-size: larger;
+            border-width: .2rem;
+        }
+
+        @media (max-width: 768px) {
+            .banner{
+                height: 25vh;
+            }
+        }
