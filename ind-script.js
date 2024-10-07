@@ -39,7 +39,7 @@
                     slides[index].classList.add('active');
                     currentSlide = index;
                 }
-                const interval = setInterval(nextSlide, 3000);
+                const interval = setInterval(nextSlide, 4500);
                 setTimeout(() => {
                 clearInterval(interval);
                 }, 45000);
@@ -53,6 +53,8 @@
                     let index = (currentSlide - 1 + slides.length) % slides.length;
                     showSlide(index);
                 }
+
+                
 
                 nextButton.addEventListener('click', nextSlide);
                 prevButton.addEventListener('click', prevSlide);
