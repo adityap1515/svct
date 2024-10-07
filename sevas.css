@@ -16,6 +16,20 @@ body {
     align-items: center;
    
 }
+
+
+.section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 .section {
     margin-bottom: 40px;
     justify-content: center;
@@ -23,6 +37,9 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .icon {
     width: 50px;

@@ -112,15 +112,25 @@ body {
 .slide.active {
     opacity: 1;
 }
+.slide.active .slidecontent {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .slidecontent {
     text-align: center;
     color: white;
-    padding: 20px;
+    padding: 5px;
     max-width: 80%;
     font-size: xx-large;
-    background-color: #ff813390;
+    transform: translateY(-300px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+    
+}
+.homeslides, h2{
+    background-color: #ff813360;
     border-radius: 10px;
+   
 }
 
 .carousel-button {
