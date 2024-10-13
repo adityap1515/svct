@@ -128,7 +128,7 @@ body {
     
 }
 .homeslides, h2{
-    background-color: #ff813360;
+    background-color: #de5500a7;
     border-radius: 10px;
    
 }
@@ -154,7 +154,7 @@ body {
                         background-position: center 20%;
                     }
                     #slide2 {
-                        background-image: url(media/p1imgid1.png);
+                        background-image: url(media/anna.jpg);
                         background-position: center 0%;
                     }
                     #slide3 { background-image: url(media/Vidya\ Danam.jpg);
@@ -165,7 +165,7 @@ body {
                         background-image: url(media/newgoshalaimg.jpg);
                     }
                     #slide6 {
-                        background-image: url(media/Vedapatashala-img1.jpg);
+                        background-image: url(media/sanskritimg.jpg);
                     }
 
 
@@ -181,7 +181,36 @@ body {
 }
                    
                             
-        
+.styled-button {
+    background-color: #0777b4c5;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .styled-button:hover {
+    background-color: #45a049; /* Darker green */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  .styled-button {
+    animation: button-animation 1.5s infinite;
+  }
+  
+        @keyframes button-animation {
+            0%, 100% {
+            transform: scale(1);
+            }
+            50% {
+            transform: scale(1.05);
+            }
+        }
+                
         
        
         
