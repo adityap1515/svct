@@ -194,7 +194,7 @@ body {
   }
   
   .styled-button:hover {
-    background-color: #45a049; /* Darker green */
+    background-color: #05527cd8; /* Darker green */
     transform: translateY(-2px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
@@ -207,7 +207,7 @@ body {
             transform: scale(1);
             }
             50% {
-            transform: scale(1.05);
+            transform: scale(1.077);
             }
         }
                 
@@ -460,3 +460,66 @@ body {
             max-width: 100vb;
             max-height: 100vh;
         }
+
+
+
+
+
+                                    #meeting15sep{
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center;
+                                        justify-content: center;
+                                        text-align: center;
+                                        padding-top: 4rem;
+                                        padding-bottom: 4rem;
+                                    }
+
+
+                                    #grpphoto15{
+                                        height: 45rem;
+                                        width: 80rem;
+                                    }
+
+                                    .a15sepmeeting{
+                                        padding: 25px;
+                                        padding-left: 9rem;
+                                        padding-right: 9rem;
+                                        font-size: x-large;
+                                    }
+
+                                    #h315th{
+                                        background-color: #1ecf27ad;
+                                        padding: 20px;
+                                        display: inline-block;
+                                    }
+                                    #apdf11{
+                                        background-color: #17bebb;
+                                        color: black;
+                                        font-weight: bold;
+                                        padding: .7rem;
+                                    }
+
+
+#upcoming{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 4rem;
+    background-color: #45a04986;
+}
+.uimgs{
+    height: 30rem;
+    width: auto;
+    border-color: #000000;
+    border-width: .2rem;
+    border-style: solid;
+}
+
+
+#h3upcoming{
+    background-color: rgba(255, 0, 0, 0.473);
+    padding: .5rem;
+}
