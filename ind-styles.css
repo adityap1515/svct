@@ -324,14 +324,14 @@ body {
 .card-container {
     display: flex;
     flex-wrap: wrap; 
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-start; 
     gap: 20px;
     width: auto;
 }
 
 .card {
-    flex: 1 1 auto(50% - 20px); 
+    flex: 1 1 auto(45%); 
     max-width: auto;
     height: fit-content;
     background-color: #ffffff;
@@ -347,43 +347,53 @@ body {
     margin-bottom: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.card img{
+    width: 100%;
+    height: auto;
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .card-container {
+        justify-content: space-around; 
+    }
 
-@media (max-width: 768px) {
     .card {
-        flex: 1 1 100%; /* On smaller screens, make cards take full width */
-        max-width: 100%;
+        width: 40%; 
     }
 }
-        .card-img{
-            width: 35rem;
-            height: 50rem;
-        }
+
+@media (min-width: 1441px) {
+    .card-container {
+        justify-content: center; 
+    }
+
+    .card {
+        width: 40%;
+}
+}
+
+@media (max-width: 900px) {
+    .card {
+        flex: 1 1 80%; /* On smaller screens, make cards take full width */
+        max-width: 80%;
+        height: auto;
+    }
+    .imgs{
+        flex: 1 1 80%;
+        max-width: 80%;
+        height: auto;
+    }
+    #grpphoto15{
+        height: auto;
+        width: 70%;
+    }
+    
+}
 
 .txt{
     background-color: white;
     border-radius: 20%;
     border-width: 5px;
 }
-
-                    @media (max-width: 768px) {
-                        .card {
-                            min-width: 10rem;
-                            width: 25rem;
-                            height: 30rem;
-                            font-size: larger;
-                        }
-                    }
-                    @media (max-width: 480px) {
-                        .card {
-                            min-width: 8rem;
-                            width: 20rem;
-                            height: 30rem;
-                            font-size: larger;
-
-
-                        }
-                    }
-
 
 
 
@@ -450,12 +460,15 @@ body {
         .ytvid{
            justify-content: center;
            align-items: center;
-           padding-left: 16%;
+           text-align: center;
            
         }
         .vid{
-            padding: 2%;
+            padding: 5px;
+            height: 25rem;
+            width: 40%;
         }
+
         #s1img{
             max-width: 100vb;
             max-height: 100vh;
@@ -477,14 +490,14 @@ body {
 
 
                                     #grpphoto15{
-                                        height: 45rem;
-                                        width: 80rem;
+                                        height: auto;
+                                        width: 80%;
                                     }
 
                                     .a15sepmeeting{
                                         padding: 25px;
-                                        padding-left: 9rem;
-                                        padding-right: 9rem;
+                                        padding-left: 2%;
+                                        padding-right: 2%;
                                         font-size: x-large;
                                     }
 
@@ -492,12 +505,16 @@ body {
                                         background-color: #1ecf27ad;
                                         padding: 20px;
                                         display: inline-block;
+                                        justify-content: space-around;
+                                        text-align: justify;
                                     }
                                     #apdf11{
                                         background-color: #17bebb;
                                         color: black;
                                         font-weight: bold;
-                                        padding: .7rem;
+                                        padding: .65%;
+                                        margin: 2%;
+                                        font-size: medium;
                                     }
 
 
@@ -520,6 +537,25 @@ body {
 
 
 #h3upcoming{
-    background-color: rgba(255, 0, 0, 0.473);
+    background-color: rgba(236, 0, 0, 0.795);
     padding: .5rem;
+    font-size: xx-large;
+    color: white;
+    font-weight: bolder;
+    animation: ani1 4s infinite;
+}
+
+@keyframes ani1 {
+    0%{
+        background-color: rgb(8, 176, 228)red;
+        transform: scale(0.9);
+    }
+    50%{
+        background-color: red;
+        transform: scale(1.2);
+    }
+    100%{
+        background-color: rgb(8, 176, 228);
+        transform: scale(0.9);
+    }
 }
