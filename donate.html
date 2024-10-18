@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations</title>
+    <link rel="stylesheet" href="donation.css">
+    <link rel="stylesheet" href="ind-styles.css">
+</head>
+<body>
+
+                            <nav class="navbar">
+                                <div class="navbar-container">
+                                    <div class="logo-sec">
+                                        <a href="#home" class="logo">
+                                            <img id="logo1" src="media/Srividya-Charities-Trust-logo.png" alt="Srividya Charities Logo">Srividya Charities
+                                        </a>
+                                    </div>
+                                    <ul class="nav-links">
+                                        <li><a href="#home">Home</a></li>
+                                        <li><a href="narayanseva.html">Donate</a></li>
+                                        <li><a href="#our-work">Our Work</a></li>
+                                        <li><a href="#about-us">About Us</a></li>
+                                    </ul>
+                                    <div class="hamburger">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </nav>
+
+
+
+
+
+    <div class="container">
+        <h1>Support Our Cause</h1>
+        <p>Your generosity makes a difference. Please fill out the form below to make a donation.</p>
+        
+        <form id="donationForm">
+            <!--<div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div> -->
+            <div class="form-group">
+                <label for="amount">Donation Amount (INR)</label>
+                <input type="number" id="amount" name="amount" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message (Optional)</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="paymentOptions" style="display: none;">
+            <h2>Choose Payment Method</h2>
+            <button id="upiButton" class="payment-button">UPI</button>
+            <button id="qrButton" class="payment-button">QR Code</button>
+            <button id="bankButton" class="payment-button">Bank Transfer</button>
+        </div>
+
+        <div id="upiModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>UPI Payment</h2>
+                <p>UPI ID: <span id="upiId">EzE0093445@CUB</span></p>
+                <a id="upiLink" href="#" target="_blank">Open in UPI App</a>
+            </div>
+        </div>
+
+        <div id="qrModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>QR Code Payment</h2>
+                <img id="qrCode" src="" alt="QR Code">
+            </div>
+        </div>
+
+        <div id="bankModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Bank Transfer</h3>
+            <p>Bank: City Union Bank Ltd, Indiranagar, Bangalore</p>
+            <p>Account Number: 500101013370991</p>
+            <p>IFSC Code: CIUB0000139</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('donationForm');
+            const paymentOptions = document.getElementById('paymentOptions');
+            const upiButton = document.getElementById('upiButton');
+            const qrButton = document.getElementById('qrButton');
+            const bankButton = document.getElementById('bankButton');
+            const upiModal = document.getElementById('upiModal');
+            const qrModal = document.getElementById('qrModal');
+            const bankModal = document.getElementById('bankModal');
+            const closeBtns = document.getElementsByClassName('close');
+            const upiId = "EzE0093445@CUB";
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = document.getElementById('amount').value;
+                
+                // Generate UPI link
+                const upiLink = `upi://pay?pa=${upiId}&pn=Your%20Charity&am=${amount}&cu=INR`;
+                document.getElementById('upiLink').href = upiLink;
+
+                // Generate QR code URL
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+                document.getElementById('qrCode').src = qrCodeUrl;
+
+                form.style.display = 'none';
+                paymentOptions.style.display = 'block';
+            });
+
+            upiButton.addEventListener('click', () => openModal(upiModal));
+            qrButton.addEventListener('click', () => openModal(qrModal));
+            bankButton.addEventListener('click', () => openModal(bankModal));
+
+            Array.from(closeBtns).forEach(btn => {
+                btn.addEventListener('click', () => closeModal(btn.parentElement.parentElement));
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    closeModal(event.target);
+                }
+            });
+
+            function openModal(modal) {
+                closeAllModals();
+                modal.style.display = 'block';
+            }
+
+            function closeModal(modal) {
+                modal.style.display = 'none';
+            }
+
+            function closeAllModals() {
+                const modals = document.getElementsByClassName('modal');
+                Array.from(modals).forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

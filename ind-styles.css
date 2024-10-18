@@ -127,7 +127,7 @@ body {
     transition: opacity 0.9s ease, transform 0.9s ease;
     
 }
-.homeslides, h2{
+.homeslides, {
     background-color: #de5500a7;
     border-radius: 10px;
    
@@ -150,8 +150,16 @@ body {
 .next { right: 10px; }
 
                     /* Individual slide backgrounds */
-                    #slide1 { background-image: url(media/Srividya.jpeg); 
-                        background-position: center 20%;
+                    #slide1 { background-color: white;
+                        height: 90%;
+                        width: 90%;
+                        text-align: center;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    #srividyaimg{
+                        height: 100%;
+                        width: 80%;
                     }
                     #slide2 {
                         background-image: url(media/anna.jpg);
@@ -305,11 +313,16 @@ body {
 
 
 #h1-s2{
-    justify-content: center;
-    align-items: center;
     display: flex;
     font-size: xx-large;
+    background-color: #6d12ddc7;
+    width: fit-content;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
+
 
 /* Seva cards with animations */
 .cards {
@@ -319,6 +332,10 @@ body {
     overflow: hidden;
     background-color: #ffe7e7;
     padding: 40px 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .card-container {
