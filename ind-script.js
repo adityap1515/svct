@@ -42,7 +42,7 @@
                 const interval = setInterval(nextSlide, 4500);
                 setTimeout(() => {
                 clearInterval(interval);
-                }, 45000);
+                }, 4);
 
                 function nextSlide() {
                     let index = (currentSlide + 1) % slides.length;
@@ -53,7 +53,6 @@
                     let index = (currentSlide - 1 + slides.length) % slides.length;
                     showSlide(index);
                 }
-
                 
 
                 nextButton.addEventListener('click', nextSlide);
@@ -62,16 +61,4 @@
 
 
 
-
-
-document.addEventListener('scroll', () => {
-    const section = document.querySelector('.seva-cards');
-    const bounding = section.getBoundingClientRect();
-  
-    if (bounding.top <= 0 && bounding.bottom > window.innerHeight) {
-      section.classList.add('sticky');
-    } else {
-      section.classList.remove('sticky');
-    }
-  });
-  
+               

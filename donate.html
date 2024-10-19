@@ -8,28 +8,36 @@
     <link rel="stylesheet" href="ind-styles.css">
 </head>
 <body>
-
-                            <nav class="navbar">
-                                <div class="navbar-container">
-                                    <div class="logo-sec">
-                                        <a href="#home" class="logo">
-                                            <img id="logo1" src="media/Srividya-Charities-Trust-logo.png" alt="Srividya Charities Logo">Srividya Charities
-                                        </a>
-                                    </div>
-                                    <ul class="nav-links">
-                                        <li><a href="#home">Home</a></li>
-                                        <li><a href="narayanseva.html">Donate</a></li>
-                                        <li><a href="#our-work">Our Work</a></li>
-                                        <li><a href="#about-us">About Us</a></li>
-                                    </ul>
-                                    <div class="hamburger">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </nav>
-
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo-sec">
+                <a href="#home" class="logo">
+                    <img id="logo1" src="media/Srividya-Charities-Trust-logo.png" alt="Srividya Charities Logo">Srividya Charities
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#apdf11">Upcoming Events</a></li>
+                <li><a href="donate.html">Donate</a></li>
+            
+                <li><a href="" id="actsbtn">Our activities</a>
+                    <ul class="acts" >
+                        <li><a href="narayanseva.html">Narayan Seva</a></li>
+                        <li><a href="goshala.html">Go Grasa Seva</a></li>
+                        <li><a href="vidhyadanam.html">Vidyadanam</a></li>
+                        <li><a href="vedapathashala.html">Vedapatashala</a></li>
+                        <li><a href="sanskrit.html">Sanskrit Language and Scriptures</a></li>
+                    </ul>
+                </li>
+                <li><a href="inspiration.html">Our inspiration</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
 
 
@@ -49,14 +57,14 @@
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
+                <input type="tel" id="phone" name="phone" required>
             </div> -->
             <div class="form-group">
                 <label for="amount">Donation Amount (INR)</label>
-                <input type="number" id="amount" name="amount" min="1" required>
+                <input type="number" id="amount" name="amount" min="1" max="500000" required>
             </div>
             <div class="form-group">
-                <label for="message">Message (Optional)</label>
+                <label for="message">Message if any (Optional)</label>
                 <textarea id="message" name="message"></textarea>
             </div>
             <button type="submit">Submit</button>
