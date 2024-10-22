@@ -47,22 +47,49 @@
         <p>Your generosity makes a difference. Please fill out the form below to make a donation.</p>
         
         <form id="donationForm">
-            <!--<div class="form-group">
+            <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" required>
-            </div> -->
+            </div> 
             <div class="form-group">
-                <label for="amount">Donation Amount (INR)</label>
+                <label for="pan">Pan (permanent account number)</label>
+                <input type="text" id="pan" name="pan">
+            </div>
+            <div class="form-group">
+                <label for="amount" id="amt">Donation Amount (INR)</label>
                 <input type="number" id="amount" name="amount" min="1" max="500000" required>
             </div>
+            <div class="radio-input">
+                <label>
+                    <input value="Annadanam" name="value-radio" id="annadanam" type="radio" checked/>
+                    <span>Any</span>
+                  </label>
+                <label>
+                  <input value="Annadanam" name="value-radio" id="annadanam" type="radio" />
+                  <span>Annadanam</span>
+                </label>
+                <label>
+                  <input value="vidyadanam" name="value-radio" id="vidya" type="radio" />
+                  <span>Vidyadanam</span>
+                </label>
+                <label>
+                  <input value="value-3" name="value-radio" id="value-3" type="radio" />
+                  <span>GoGrasa Seva</span>
+                </label>
+                <span class="selection"></span>
+              </div>
+              <label>
+                <input value="vedapathashala" name="value-radio" id="veda" type="radio" />
+                <span>vedapathasahala</span>
+              </label>
+              <label>
+                <input value="sanskrit" name="value-radio" id="sanskrit" type="radio" />
+                <span>Sanskrit Language</span>
+              </label>
             <div class="form-group">
                 <label for="message">Message if any (Optional)</label>
                 <textarea id="message" name="message"></textarea>
