@@ -1,0 +1,24 @@
+:root{
+    --srividyaimg: url(media/srividya.jpeg);
+    --annadanamimg: url(media/anna.jpg);
+    --vidyadanam: url(media/Vidya\ Danam.jpg);
+    --goshalaimg: url(media/newgoshalaimg.jpg);
+    --vedapathashala: url(media/Vedapatashala\ anim\ image.jpg);
+    --sanskritimg: url(media/sansskritimg3.2.png);
+}
+
+#slide2 {
+    background-image: var(--annadanamimg);
+    background-position: center 0%;
+}
+#slide3 { background-image: var(--vidyadanam);
+    background-position: center 70%;
+ }
+#slide4 {  background-image: var(--goshalaimg);  }
+#slide5 {
+    background-image: var(--vedapathashala);
+}
+#slide6 {
+    background-image: var(--sanskritimg);
+    background-size: cover;
+}

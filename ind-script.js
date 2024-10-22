@@ -1,64 +1,91 @@
+// Hamburger Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
 
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+// Back-to-Top Button Visibility
+window.addEventListener('scroll', function() {
+    const backToTopButton = document.getElementById('backToTop');
+    if (backToTopButton) {
+        if (window.scrollY > 200) { 
+            backToTopButton.style.display = 'block';
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.style.display = 'none';
+            backToTopButton.classList.remove('visible');
+        }
+    }
+});
+
+// Scroll to the Top
+const backToTopButton = document.getElementById('backToTop');
+if (backToTopButton) {
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
+    });
+}
 
+// Carousel Functionality
+const slides = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+let currentSlide = 0; 
 
-        //backtoTop Visibility on scroll [function]
-        window.addEventListener('scroll', function() {
-            const backToTopButton = document.getElementById('backToTop');
-            if (window.scrollY > 200) { 
-                backToTopButton.style.display = 'block';
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.style.display = 'none';
-                backToTopButton.classList.remove('visible');
-            }
-        });
+// Function to show a specific slide based on index
+function showSlide(index) {
+    
+    if (index >= 0 && index < slides.length) {
+     
+        slides[currentSlide].classList.remove('active');
+       
+        currentSlide = index;
         
-        // Scroll to the top when the button is clicked
-        document.getElementById('backToTop').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+      
+        slides[currentSlide].classList.add('active');
+    }
+}
 
 
-                //cAROUSEL  function
-                const slides = document.querySelectorAll('.slide');
-                const prevButton = document.querySelector('.prev');
-                const nextButton = document.querySelector('.next');
-                let currentSlide = 0;
+function nextSlide() {
+    let nextIndex = (currentSlide + 1) % slides.length; 
+    showSlide(nextIndex); 
+}
 
-                function showSlide(index) {
-                    slides[currentSlide].classList.remove('active');
-                    slides[index].classList.add('active');
-                    currentSlide = index;
-                }
-                const interval = setInterval(nextSlide, 4500);
-                setTimeout(() => {
-                clearInterval(interval);
-                }, 4);
+// Previous slide function
+function prevSlide() {
+    let prevIndex = (currentSlide - 1 + slides.length) % slides.length; 
+    showSlide(prevIndex); 
+}
 
-                function nextSlide() {
-                    let index = (currentSlide + 1) % slides.length;
-                    showSlide(index);
-                }
-
-                function prevSlide() {
-                    let index = (currentSlide - 1 + slides.length) % slides.length;
-                    showSlide(index);
-                }
-                
-
-                nextButton.addEventListener('click', nextSlide);
-                prevButton.addEventListener('click', prevSlide);
+// Auto-scrolling function (carousel autoplay)
+function startAutoScroll() {
+    autoScrollInterval = setInterval(nextSlide, 3800);
+}
 
 
+function pauseAutoScroll() {
+    clearInterval(autoScrollInterval); 
+    setTimeout(startAutoScroll, PAUSE_DURATION); 
+}
 
 
-               
+nextButton.addEventListener('click', () => {
+    nextSlide();
+    pauseAutoScroll(); 
+});
+
+prevButton.addEventListener('click', () => {
+    prevSlide();
+    pauseAutoScroll(); 
+});
+
+// Initial auto-scroll start
+startAutoScroll();
