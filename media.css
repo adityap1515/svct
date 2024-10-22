@@ -12,7 +12,6 @@
     background-position: center 0%;
 }
 #slide3 { background-image: var(--vidyadanam);
-    background-position: center 70%;
  }
 #slide4 {  background-image: var(--goshalaimg);  }
 #slide5 {
@@ -21,4 +20,36 @@
 #slide6 {
     background-image: var(--sanskritimg);
     background-size: cover;
+}
+
+
+#annadanambanner{
+    background-image: var(--annadanamimg);
+}
+
+#goshalabanner{
+    background-image: var(--goshalaimg);
+}
+#vidyabanner{
+    background-image: var(--vidyadanam);
+}
+#vedabanner{
+    background-image: var(--vedapathashala);
+}
+#sanskritbanner{
+    background-image: var(--sanskritimg);
+    width: 50%;
+    margin-left: 25%;
+}
+   
+
+
+.banner{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
 }
