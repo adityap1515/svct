@@ -1,257 +1,221 @@
 :root {
-    --primary-color: #ff8133;
-    --secondary-color: #ffd6b8;
-    --text-color: #333;
-    --background-color: #f9f9f9;
+  --primary-color: #ff8133;
+  --secondary-color: #ffd6b8;
+  --text-color: #333;
+  --background-color: #f9f9f9;
+  --success-color: #3fa311;
+  --hover-color: #d3f321;
+  --border-radius: 8px;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-h1, h2 {
-    color: var(--primary-color);
-}
-
-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-form:hover {
-    transform: translateY(-5px);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  flex: 1;
 }
 
 .paymentholder {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  justify-content: center;
-  align-items: center; /* Center horizontally */
-  text-align: center;
-  width: 100%; /* Allow full width for centering */
-  margin-top: 20px; /* Add some space above */
-}
-
-button {
-  background-color: #3fa311a9;
-  color: rgb(0, 0, 0);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bolder;
-}
-
-button:hover {
-  background-color: #e66f1c;
-}
-
-.payment-button {
-  margin-bottom: 1rem; /* Space between buttons */
-  width: 60%; /* Fixed width for buttons */
-  font-size: 1.1em;
-}
-
-.paymentholder{
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
-  width: 100vb;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.815);
-    animation: modalBackgroundFadeIn 0.3s;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 8px;
-    animation: modalContentFadeIn 0.3s;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-@keyframes modalBackgroundFadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes modalContentFadeIn {
-    from {opacity: 0; transform: translateY(-50px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-}
-
-#upiLink {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-#upiLink:hover {
-    background-color: #e66f1c;
-}
-
-#qrCode {
-    display: block;
-    margin: 1rem auto;
-    max-width: 100%;
-    height: auto;
+  justify-content: center;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 #paymentOptions {
-    margin-top: 2rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-.form-section {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 0 20px;
+#paymentOptions h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
-.dropdown-group {
-  margin-bottom: 20px;
-}
-
-.dropdown-group label,
-.form-group label {
+.payment-button {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #333;
-}
-
-.styled-select {
   width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
   background-color: white;
-  font-size: 16px;
-  color: #333;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
   cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px top 50%;
-  background-size: 12px auto;
+  transition: all 0.3s ease;
 }
 
-.styled-select:hover {
-  border-color: #999;
+.payment-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
 }
 
-.styled-select:focus {
-  outline: none;
-  border-color: #666;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+.informpayment {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fff3e0;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 4px;
+  max-width: 400px;
 }
 
-.form-group textarea {
-  width: 100%;
-  min-height: 100px;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+.informpayment h3 {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin: 0;
   line-height: 1.5;
-  resize: vertical;
 }
 
-.form-group textarea:hover {
-  border-color: #999;
+/* Modal Styles */
+.modal {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.form-group textarea:focus {
-  outline: none;
-  border-color: #666;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  max-width: 400px;
+  width: 90%;
+  margin: 10vh auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
 }
 
-/* Responsive styles */
+@keyframes modalSlideIn {
+  from {
+      transform: translateY(-100px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: var(--text-color);
+}
+
+#upiLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#upiLink:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .paymentholder {
+      padding: 1rem;
+      margin: 1rem;
+  }
+
+  .payment-button {
+      padding: 0.8rem;
+      font-size: 1rem;
+  }
+
+  #paymentOptions h2 {
+      font-size: 1.5rem;
+  }
+
+  .modal-content {
+      width: 85%;
+      padding: 1.5rem;
+      margin: 5vh auto;
+  }
+}
+
 @media screen and (max-width: 480px) {
-  .styled-select,
-  .form-group textarea {
-    font-size: 14px;
-    padding: 10px;
+  .container {
+      padding: 1rem;
   }
-  
-  .dropdown-group label,
-  .form-group label {
-    font-size: 14px;
+
+  .paymentholder {
+      padding: 0.8rem;
   }
-} 
 
+  .payment-button {
+      padding: 0.7rem;
+      font-size: 0.9rem;
+  }
 
-#g80{
-  background-color: #e6ea00bb;
-  border-radius: 20px;
-  padding: 6%;
+  .informpayment {
+      font-size: 0.9rem;
+      padding: 0.8rem;
+  }
 }
+
+
+form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+form:hover {
+  transform: translateY(-5px);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+

@@ -29,6 +29,9 @@
             <button id="qrButton" class="payment-button">QR Code</button>
             <button id="bankButton" class="payment-button">Bank Transfer</button>
         </div>
+        <div class="informpayment">
+            <h3 class="informpayment">Please 'do not refresh' this page. it will timeout in a few minutes, you will not see a payment success or confirmation on this page on a successful payment, you will soon hear from us.</h3>
+        </div>
 
         <!-- UPI Modal -->
         <div id="upiModal" class="modal">

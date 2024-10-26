@@ -29,7 +29,14 @@ $dbpassword = "";
 
 
         if ($conn->query($sql) === TRUE) {
-        
+            echo "
+            <form id='redirectForm' action='payment-methods.php' method='POST'>
+                <input type='hidden' name='amount' value='{$amount}'>
+            </form>
+            <script>
+                document.getElementById('redirectForm').submit();
+            </script>
+            ";
           } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
           }
