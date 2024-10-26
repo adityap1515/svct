@@ -101,49 +101,79 @@
     </footer>
 
 
-
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const upiButton = document.getElementById('upiButton');
-            const qrButton = document.getElementById('qrButton');
-            const bankButton = document.getElementById('bankButton');
-            const upiModal = document.getElementById('upiModal');
-            const qrModal = document.getElementById('qrModal');
-            const bankModal = document.getElementById('bankModal');
-            const closeBtns = document.getElementsByClassName('close');
+document.addEventListener('DOMContentLoaded', function() {
+    const upiButton = document.getElementById('upiButton');
+    const qrButton = document.getElementById('qrButton');
+    const bankButton = document.getElementById('bankButton');
+    const upiModal = document.getElementById('upiModal');
+    const qrModal = document.getElementById('qrModal');
+    const bankModal = document.getElementById('bankModal');
+    const closeBtns = document.getElementsByClassName('close');
 
-           
-            upiButton.addEventListener('click', () => openModal(upiModal));
-            qrButton.addEventListener('click', () => openModal(qrModal));
-            bankButton.addEventListener('click', () => openModal(bankModal));
+    function openModal(modal) {
+        closeAllModals();  // Close any other open modals
+        document.body.classList.add('modal-open');
+        modal.style.display = 'block';
+        modal.offsetHeight; // Force reflow
+        modal.classList.add('show');
+    }
 
-            Array.from(closeBtns).forEach(btn => {
-                btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
-            });
+    function closeModal(modal) {
+        modal.classList.remove('show');
+        document.body.classList.remove('modal-open');
+        // Wait for the fade-out animation to complete before setting display to none
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300); // Delay matches the fade-out animation duration
+    }
 
-            window.addEventListener('click', function(event) {
-                if (event.target.classList.contains('modal')) {
-                    closeModal(event.target);
-                }
-            });
-
-            function openModal(modal) {
-                closeAllModals();
-                modal.style.display = 'block';
-            }
-
-            function closeModal(modal) {
-                modal.style.display = 'none';
-            }
-
-            function closeAllModals() {
-                [upiModal, qrModal, bankModal].forEach(modal => {
-                    modal.style.display = 'none';
-                });
+    function closeAllModals() {
+        [upiModal, qrModal, bankModal].forEach(modal => {
+            if (modal.style.display === 'block') {
+                closeModal(modal);
             }
         });
-    </script>
+    }
+
+    // Event Listeners
+    upiButton.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        openModal(upiModal);
+    });
+
+    qrButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(qrModal);
+    });
+
+    bankButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(bankModal);
+    });
+
+    Array.from(closeBtns).forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeModal(btn.closest('.modal'));
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target);
+        }
+    });
+
+    const modalContents = document.querySelectorAll('.modal-content');
+    modalContents.forEach(content => {
+        content.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+});
+</script>
+
 
 </body>
 </html>

@@ -4,8 +4,9 @@
   --text-color: #333;
   --background-color: #f9f9f9;
   --success-color: #3fa311;
-  --hover-color: #d3f321;
+  --hover-color: #e66f1c;
   --border-radius: 8px;
+  --modal-bg: rgba(0, 0, 0, 0.75);
 }
 
 body {
@@ -16,54 +17,38 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  flex: 1;
+  position: relative;
 }
 
 .paymentholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  margin: 2rem auto;
+  width: 100%;
   max-width: 600px;
-  background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 #paymentOptions {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+  text-align: center;
 }
 
 #paymentOptions h2 {
   color: var(--primary-color);
-  text-align: center;
+  font-size: 1.8rem;
   margin-bottom: 2rem;
-  font-size: 2rem;
 }
 
 .payment-button {
   display: block;
-  width: 100%;
+  width: 60%;
+  margin: 1rem auto;
   padding: 1rem;
-  margin: 1rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-color);
   background-color: white;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -75,70 +60,98 @@ body {
 }
 
 .informpayment {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: #fff3e0;
-  border-left: 4px solid var(--primary-color);
-  border-radius: 4px;
-  max-width: 400px;
+  margin: 2rem auto;
+  max-width: 500px;
+  text-align: center;
 }
 
 .informpayment h3 {
-  color: var(--text-color);
-  font-size: 1rem;
+  background-color: #fff3e0;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+  font-size: 0.95rem;
+  font-weight: normal;
   margin: 0;
   line-height: 1.5;
 }
 
 /* Modal Styles */
 .modal {
-  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-bg);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal-content {
+  position: relative;
   background-color: white;
+  width: 90%;
+  max-width: 400px;
+  margin: 15vh auto;
   padding: 2rem;
   border-radius: var(--border-radius);
-  max-width: 400px;
-  width: 90%;
-  margin: 10vh auto;
-  position: relative;
-  animation: modalSlideIn 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
-@keyframes modalSlideIn {
-  from {
-      transform: translateY(-100px);
-      opacity: 0;
-  }
-  to {
-      transform: translateY(0);
-      opacity: 1;
-  }
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .close {
   position: absolute;
   right: 1rem;
   top: 1rem;
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  cursor: pointer;
   font-size: 1.5rem;
-  color: #999;
-  transition: color 0.3s ease;
+  line-height: 24px;
+  text-align: center;
+  transition: opacity 0.3s ease;
 }
 
 .close:hover {
+  opacity: 1;
+}
+
+/* UPI Modal Specific Styles */
+#upiModal .modal-content h2 {
   color: var(--text-color);
+  margin-top: 0;
+}
+
+#upiModal .modal-content p {
+  margin: 1rem 0;
 }
 
 #upiLink {
   display: inline-block;
-  margin-top: 1rem;
   padding: 0.8rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
   border-radius: var(--border-radius);
   font-weight: 600;
+  margin-top: 1rem;
   transition: all 0.3s ease;
 }
 
@@ -147,16 +160,26 @@ body {
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .paymentholder {
-      padding: 1rem;
-      margin: 1rem;
-  }
+/* QR Code Modal Specific Styles */
+#qrCode {
+  display: block;
+  max-width: 200px;
+  height: auto;
+  margin: 1.5rem auto;
+}
 
+/* Bank Transfer Modal Specific Styles */
+#bankModal .modal-content p {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
   .payment-button {
-      padding: 0.8rem;
-      font-size: 1rem;
+      width: 80%;
   }
 
   #paymentOptions h2 {
@@ -166,30 +189,42 @@ body {
   .modal-content {
       width: 85%;
       padding: 1.5rem;
-      margin: 5vh auto;
+      margin: 10vh auto;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .container {
-      padding: 1rem;
-  }
-
-  .paymentholder {
-      padding: 0.8rem;
-  }
-
   .payment-button {
-      padding: 0.7rem;
-      font-size: 0.9rem;
+      width: 90%;
+      font-size: 1rem;
+      padding: 0.8rem;
   }
 
-  .informpayment {
+  .informpayment h3 {
       font-size: 0.9rem;
       padding: 0.8rem;
+  }
+
+  .modal-content {
+      padding: 1rem;
+      margin: 5vh auto;
   }
 }
 
+/* Prevent background scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 form {
   background-color: white;
@@ -197,6 +232,8 @@ form {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  text-align: center;
+  max-width: 60%;
 }
 
 form:hover {
@@ -219,3 +256,8 @@ input, textarea {
   border-radius: 4px;
 }
 
+#g80{
+  background-color: #e6ea00bb;
+  border-radius: 20px;
+  padding: 6%;
+}
