@@ -20,12 +20,13 @@ $dbpassword = "";
         $seva = $_POST['donation-category'];
         $name = $_POST['name'];
         $phone = $_POST['phone'];
+        $email = $_POST['email'];
         $amount = $_POST['amount'];
         $pan = $_POST['pan'];
         $message = $_POST['message'];
 
 
-            $sql = "INSERT INTO `donations`(`name`, `phone`, `pan`, `amount`, `seva`, `message`) VALUES ('$name','$phone','$pan','$amount','$seva','$message')";
+            $sql = "INSERT INTO `donations`(`name`, `phone`, 'email',  `pan`, `amount`, `seva`, `message`) VALUES ('$name','$phone','$email','$pan','$amount','$seva','$message')";
 
 
         if ($conn->query($sql) === TRUE) {
