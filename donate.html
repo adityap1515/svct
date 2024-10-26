@@ -46,7 +46,7 @@
         <h1>Support Our Cause</h1>
         <p>Your generosity makes a difference. Please fill out the form below to make a donation.</p>
         
-        <form id="donationForm">
+        <form id="donationForm" method="post" action="donor.php">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -56,81 +56,37 @@
                 <input type="tel" id="phone" name="phone" required>
             </div> 
             <div class="form-group">
-                <label for="pan">Pan (permanent account number)</label>
+                <label for="pan">PAN no</label>
                 <input type="text" id="pan" name="pan">
             </div>
             <div class="form-group">
                 <label for="amount" id="amt">Donation Amount (INR)</label>
                 <input type="number" id="amount" name="amount" min="1" max="500000" required>
             </div>
-            <div class="radio-input">
-                <label>
-                    <input value="Annadanam" name="value-radio" id="annadanam" type="radio" checked/>
-                    <span>Any</span>
-                  </label>
-                <label>
-                  <input value="Annadanam" name="value-radio" id="annadanam" type="radio" />
-                  <span>Annadanam</span>
-                </label>
-                <label>
-                  <input value="vidyadanam" name="value-radio" id="vidya" type="radio" />
-                  <span>Vidyadanam</span>
-                </label>
-                <label>
-                  <input value="value-3" name="value-radio" id="value-3" type="radio" />
-                  <span>GoGrasa Seva</span>
-                </label>
-                <span class="selection"></span>
+            <div class="dropdown-group">
+                <label for="donation-category">Select Donation Category</label>
+                <select id="donation-category" name="donation-category" class="styled-select">
+                  <option value="any">Any</option>
+                  <option value="annadanam">Annadanam</option>
+                  <option value="vidyadanam">Vidyadanam</option>
+                  <option value="gograsa">GoGrasa Seva</option>
+                  <option value="vedapathashala">Vedapathashala</option>
+                  <option value="sanskrit">Sanskrit Language</option>
+                </select>
               </div>
-              <label>
-                <input value="vedapathashala" name="value-radio" id="veda" type="radio" />
-                <span>vedapathasahala</span>
-              </label>
-              <label>
-                <input value="sanskrit" name="value-radio" id="sanskrit" type="radio" />
-                <span>Sanskrit Language</span>
-              </label>
             <div class="form-group">
                 <label for="message">Message if any (Optional)</label>
                 <textarea id="message" name="message"></textarea>
             </div>
-            <button type="submit">Submit</button>
+            <input type="submit"></input>
+
+            <h3 id="g80">Donations are entitled to tax rebate under Sec.80g of the Income Tax Act, 1961 ( PAN No: ABFTS0613M ) Our 12A registration no. is ABFTS0613MF20221. </h3>
         </form>
 
-        <div id="paymentOptions" style="display: none;">
-            <h2>Choose Payment Method</h2>
-            <button id="upiButton" class="payment-button">UPI</button>
-            <button id="qrButton" class="payment-button">QR Code</button>
-            <button id="bankButton" class="payment-button">Bank Transfer</button>
-        </div>
-
-        <div id="upiModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>UPI Payment</h2>
-                <p>UPI ID: <span id="upiId">EzE0093445@CUB</span></p>
-                <a id="upiLink" href="#" target="_blank">Open in UPI App</a>
-            </div>
-        </div>
-
-        <div id="qrModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>QR Code Payment</h2>
-                <img id="qrCode" src="" alt="QR Code">
-            </div>
-        </div>
-
-        <div id="bankModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Bank Transfer</h3>
-            <p>Bank: City Union Bank Ltd, Indiranagar, Bangalore</p>
-            <p>Account Number: 500101013370991</p>
-            <p>IFSC Code: CIUB0000139</p>
-            </div>
-        </div>
     </div>
+
+
+
 
 
 
@@ -167,65 +123,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('donationForm');
-            const paymentOptions = document.getElementById('paymentOptions');
-            const upiButton = document.getElementById('upiButton');
-            const qrButton = document.getElementById('qrButton');
-            const bankButton = document.getElementById('bankButton');
-            const upiModal = document.getElementById('upiModal');
-            const qrModal = document.getElementById('qrModal');
-            const bankModal = document.getElementById('bankModal');
-            const closeBtns = document.getElementsByClassName('close');
-            const upiId = "EzE0093445@CUB";
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const amount = document.getElementById('amount').value;
-                
-                // Generate UPI link
-                const upiLink = `upi://pay?pa=${upiId}&pn=Your%20Charity&am=${amount}&cu=INR`;
-                document.getElementById('upiLink').href = upiLink;
-
-                // Generate QR code URL
-                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
-                document.getElementById('qrCode').src = qrCodeUrl;
-
-                form.style.display = 'none';
-                paymentOptions.style.display = 'block';
-            });
-
-            upiButton.addEventListener('click', () => openModal(upiModal));
-            qrButton.addEventListener('click', () => openModal(qrModal));
-            bankButton.addEventListener('click', () => openModal(bankModal));
-
-            Array.from(closeBtns).forEach(btn => {
-                btn.addEventListener('click', () => closeModal(btn.parentElement.parentElement));
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target.classList.contains('modal')) {
-                    closeModal(event.target);
-                }
-            });
-
-            function openModal(modal) {
-                closeAllModals();
-                modal.style.display = 'block';
-            }
-
-            function closeModal(modal) {
-                modal.style.display = 'none';
-            }
-
-            function closeAllModals() {
-                const modals = document.getElementsByClassName('modal');
-                Array.from(modals).forEach(modal => {
-                    modal.style.display = 'none';
-                });
-            }
-        });
-    </script>
+    
 </body>
 </html>
