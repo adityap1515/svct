@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    // Replace with your actual admin credentials
     if ($username === 'admin' && $password === 'Admin@svct') {
         $_SESSION['admin_logged_in'] = true;
         header('Location: index.php');

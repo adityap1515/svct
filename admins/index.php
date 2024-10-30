@@ -1,15 +1,21 @@
 <?php
-// index.php
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
     header('Location: login.php');
     exit();
 }
 
-$databaseHost = "localhost";
-$databaseName = "";
-$dbusername = "";
-$dbpassword = "";
+// Error logging configuration
+date_default_timezone_set('Asia/Kolkata');
+ini_set('log_errors', 1);
+ini_set('error_log', 'error.log');
+error_reporting(E_ALL);
+
+
+$databaseHost = "localhost"; 
+    $databaseName = "";
+    $dbusername = "";
+    $dbpassword = "";
 
 try {
     $conn = new PDO("mysql:host=$databaseHost;dbname=$databaseName", $dbusername, $dbpassword);
@@ -17,7 +23,25 @@ try {
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+
+$section = isset($_GET['section']) ? $_GET['section'] : 'pending';
+$sectionTitles = [
+    'pending' => 'Pending Donations',
+    'approved' => 'Approved Donations',
+    'disapproved' => 'Disapproved Donations'
+];
+
+$statusMap = [
+    'pending' => 0,
+    'approved' => 1,
+    'disapproved' => 2
+];
+
+$currentStatus = $statusMap[$section];
+$stmt = $conn->prepare("SELECT * FROM donations WHERE approved = ?");
+$stmt->execute([$currentStatus]);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,86 +100,65 @@ try {
     <!-- Main Content -->
     <div class="main-content min-h-screen bg-gray-100 p-8">
         <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-bold mb-6">Pending Donations</h2>
+            <h2 class="text-2xl font-bold mb-6"><?php echo $sectionTitles[$section]; ?></h2>
             
             <div class="overflow-x-auto">
                 <table class="min-w-full table-auto">
+                    <div class="flex justify-between items-center mb-6">
+    <button onclick="refreshPage()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <i class="fas fa-sync-alt mr-2"></i>
+        Refresh
+    </button>
+</div>
                     <thead>
                         <tr class="bg-gray-50">
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">id</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">email</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PAN</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seva</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Action</th>
+                            
+
+                             <?php if ($section === 'pending'): ?>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            <?php endif; ?>
+                          
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                    <?php
-                    
-        $section = isset($_GET['section']) ? $_GET['section'] : 'pending';
-        $sectionTitles = [
-            'pending' => 'Pending Donations',
-            'approved' => 'Approved Donations',
-            'disapproved' => 'Disapproved Donations'
-        ];
-$statusMap = [
-    'pending' => 0,
-    'approved' => 1,
-    'disapproved' => 2
-];
+                        <?php
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<tr data-id='" . $row['id'] . "'>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['id']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['name']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['phone']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['pan']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>₹" . htmlspecialchars($row['amount']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['seva']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['message']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['email']) . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['lastActionTimestamp']) . "</td>";
+                            
 
-$currentStatus = $statusMap[$section];
-$stmt = $conn->prepare("SELECT * FROM donations WHERE approved = ?");
-$stmt->execute([$currentStatus]);
-?>
-
-<div class="main-content min-h-screen bg-gray-100 p-8">
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-bold mb-6"><?php echo $sectionTitles[$section]; ?></h2>
-        
-        <div class="overflow-x-auto">
-            <table class="min-w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PAN</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seva</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                        <?php if ($section === 'pending'): ?>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        <?php endif; ?>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <?php
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['name']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['phone']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['pan']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>₹" . htmlspecialchars($row['amount']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['seva']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($row['message']) . "</td>";
-                        
-                        if ($section === 'pending') {
-                            echo "<td class='px-6 py-4 whitespace-nowrap'>
-                                    <button onclick='approveRecord(" . $row['id'] . ")' class='bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-600'>Approve</button>
-                                    <button onclick='disapproveRecord(" . $row['id'] . ")' class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600'>Disapprove</button>
-                                  </td>";
+                            
+                            if ($section === 'pending') {
+                                echo "<td class='px-6 py-4 whitespace-nowrap'>
+                                        <button onclick='approveRecord(" . $row['id'] . ", \"" . $row['email'] . "\")' class='bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-600'>Approve</button>
+                                        <button onclick='disapproveRecord(" . $row['id'] . ")' class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600'>Disapprove</button>
+                                      </td>";
+                            }
+                            echo "</tr>";
                         }
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 
 <script>
@@ -182,29 +185,31 @@ $stmt->execute([$currentStatus]);
         }
     }
 
-    function approveRecord(id) {
-        if (confirm('Are you sure you want to approve this donation?')) {
-            fetch('update_status.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `id=${id}&action=approve`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    removeTableRow(id);
-                    showNotification('Donation approved successfully', 'success');
-                } else {
-                    showNotification('Error updating record', 'error');
-                }
-            })
-            .catch(error => {
-                showNotification('Error processing request', 'error');
-            });
-        }
+  function approveRecord(id, email, name, amount) {
+    if (confirm('Are you sure you want to approve this donation?')) {
+        fetch('update_status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id=${id}&action=approve&email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&amount=${encodeURIComponent(amount)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                removeTableRow(id);
+                showNotification('Donation approved successfully', 'success');
+            } else {
+                showNotification('Error updating record: ' + data.error, 'error');
+            }
+        })
+        .catch(error => {
+            showNotification('Error updating record: ' + error, 'error');
+        });
     }
+}
+
+
 
     function disapproveRecord(id) {
         if (confirm('Are you sure you want to disapprove this donation?')) {
@@ -221,11 +226,13 @@ $stmt->execute([$currentStatus]);
                     removeTableRow(id);
                     showNotification('Donation disapproved', 'success');
                 } else {
-                    showNotification('Error updating record', 'error');
+                    showNotification('Error updating record: ' + data.error, 'error');
+
                 }
             })
             .catch(error => {
-                showNotification('Error processing request', 'error');
+                showNotification('Error updating record: ' + data.error, 'error');
+
             });
         }
     }
@@ -249,6 +256,10 @@ $stmt->execute([$currentStatus]);
             }, 300);
         }, 3000);
     }
+    
+    function refreshPage() {
+    window.location.reload();
+}
 </script>
 </body>
 </html>
